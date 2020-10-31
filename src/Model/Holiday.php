@@ -63,6 +63,7 @@ class Holiday
 
     public function getDate(\DateTimeZone $dateTimeZone = null): \DateTimeImmutable
     {
+        /** @psalm-suppress FalsableReturnStatement */
         return \DateTimeImmutable::createFromFormat(static::CREATE_DATE_FORMAT, $this->simpleDate, $dateTimeZone);
     }
 

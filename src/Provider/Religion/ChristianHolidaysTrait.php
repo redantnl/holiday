@@ -23,6 +23,7 @@ trait ChristianHolidaysTrait
     private function getEasterSundayDate(int $year): \DateTimeImmutable
     {
         if (false === isset($this->easterCache[$year])) {
+            /** @psalm-suppress InvalidPropertyAssignmentValue */
             $this->easterCache[$year] = \DateTimeImmutable::createFromFormat(Holiday::DISPLAY_DATE_FORMAT, $this->calculateEasterSunday($year));
         }
 
@@ -217,8 +218,10 @@ trait ChristianHolidaysTrait
     private function getRepentanceAndPrayerDay(int $year, int $additionalType = HolidayType::OTHER): Holiday
     {
         $christmasEve = \DateTimeImmutable::createFromFormat(Holiday::DISPLAY_DATE_FORMAT, "{$year}-12-24");
+        /** @psalm-suppress PossiblyFalseReference */
         $changeBy = 32 + ((int) date('w', $christmasEve->getTimestamp()));
 
+        /** @psalm-suppress PossiblyFalseReference */
         return Holiday::createFromDateTime(HolidayName::REPENTANCE_AND_PRAYER_DAY, $christmasEve->sub(new \DateInterval("P{$changeBy}D")), HolidayType::RELIGIOUS | $additionalType);
     }
 
