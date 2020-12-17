@@ -90,7 +90,7 @@ class Netherlands implements HolidayProviderInterface
             }
         }
 
-        if ($year > 1968 && $year < 1990 && $year % 5 !== 0) {
+        if ($year >= 1968 && $year < 1990 && $year % 5 !== 0) {
             return null;
         }
 
